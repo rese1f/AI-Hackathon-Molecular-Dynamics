@@ -18,7 +18,9 @@ class SeqData(data.Dataset):
         self.datasets = np.array(self.datasets)
         
     def __getitem__(self, index):
-        return self.datasets[index]
-    
+        data = self.datasets[index]
+        p, seq, label = data[0], data[1:-1].astype('int'), data[-1]
+        return p, seq, label
+
     def __len__(self):
         return self.datasets.shape[0]

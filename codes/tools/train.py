@@ -29,4 +29,25 @@ if __name__ == '__main__':
     print(args)
     writer = SummaryWriter(os.path.join('./log', args.name))
     
+    # model = Model(cfg='models/yolov5m.yaml', ch=3, nc=1)
+    # if args.checkpoint:
+    #     model.load_state_dict(torch.load(os.path.join('./checkpoints', args.checkpoint)))
+    
     trainset = SeqData(args)
+    train_iter = DataLoader(trainset,
+                            batch_size=args.batch_size,
+                            shuffle=True,
+                            num_workers=16,
+                            pin_memory=True)
+    
+    # optimizer = optim.SGD(model.parameters(), lr=args.lr, momentum=0.9, weight_decay=0.0005)
+    
+    print("Done Pre.")
+    pbar = tqdm(total = args.epoch)
+    
+    for epoch in range(args.epoch):
+        # model.train()
+        pbar.update(1)
+        
+    writer.close()
+    # torch.save(model.state_dict(), os.path.join('checkpoints', args.name+'.pth'))
