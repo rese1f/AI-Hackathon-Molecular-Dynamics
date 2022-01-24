@@ -129,4 +129,5 @@ dmypy.json
 .pyre/
 
 # Paper
-Paper/*
+paper/*
+codes/log/*
