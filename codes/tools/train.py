@@ -11,11 +11,11 @@ import random
 import os
 import sys
 from tqdm import tqdm
-
 sys.path.append('.')
 
 from configs import parse_args
 from utils.dataset import SeqData
+from utils.criterion import SeqLoss
 from model.seqmodel import SeqModel
 
 if __name__ == '__main__':
@@ -29,9 +29,8 @@ if __name__ == '__main__':
     writer = SummaryWriter(os.path.join('./log', args.name))
     
     model = SeqModel().cuda()
-    if args.checkpoint:
-        model.load_state_dict(torch.load(os.path.join('./checkpoints', args.checkpoint)))
-    
+    optimizer = optim.SGD(model.parameters(), lr=args.lr, momentum=0.9, weight_decay=0.0005)
+    loss_func = SeqLoss()
     trainset = SeqData(args)
     train_iter = DataLoader(trainset,
                             batch_size=args.batch_size,
@@ -39,13 +38,13 @@ if __name__ == '__main__':
                             num_workers=0,
                             pin_memory=True)
     
-    # optimizer = optim.SGD(model.parameters(), lr=args.lr, momentum=0.9, weight_decay=0.0005)
-    
-    print("Done Pre.")
+    if args.checkpoint:
+        model.load_state_dict(torch.load(os.path.join('./checkpoints', args.checkpoint)))
     pbar = tqdm(total = args.epoch)
+    print("Done Pre.")
     
     ###################################
-    # This Block is for dataloader test
+    # This Block is for  test
     for p, seq, label in train_iter:
         seq = seq.cuda()
         model(seq)
@@ -54,10 +53,15 @@ if __name__ == '__main__':
     
     for epoch in range(args.epoch):
         model.train()
-        
-        # TODO
-        
+        for p, seq, label in train_iter:
+            seq, label = seq.cuda(), label.cuda()
+            pred = model(seq)
+            loss = loss_func(pred, label)
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
+        writer.add_scalar('loss', loss, epoch)
         pbar.update(1)
-        
+
     writer.close()
     torch.save(model.state_dict(), os.path.join('checkpoints', args.name+'.pth'))

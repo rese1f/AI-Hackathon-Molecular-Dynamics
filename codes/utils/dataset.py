@@ -18,8 +18,8 @@ class SeqData(data.Dataset):
         self.datasets = np.array(self.datasets)
         
     def __getitem__(self, index):
-        data = self.datasets[index]
-        p, seq, label = data[0], data[1:-1].reshape(32,1).astype('float32'), data[-1]
+        data = self.datasets[index].astype('float32')
+        p, seq, label = data[0], data[1:-1].reshape(32,1), data[-1]
         return p, seq, label
 
     def __len__(self):

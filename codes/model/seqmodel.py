@@ -10,4 +10,9 @@ class SeqModel(nn.Module):
         self.T = Transformer()
     
     def forward(self, x):
-        return self.T(x)
+        attention = self.T(x)
+        
+        # Temporary Decoder
+        x = attention
+        
+        return x
