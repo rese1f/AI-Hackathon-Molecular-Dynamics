@@ -36,18 +36,26 @@ if __name__ == '__main__':
     train_iter = DataLoader(trainset,
                             batch_size=args.batch_size,
                             shuffle=True,
-                            num_workers=16,
+                            num_workers=0,
                             pin_memory=True)
     
-    optimizer = optim.SGD(model.parameters(), lr=args.lr, momentum=0.9, weight_decay=0.0005)
+    # optimizer = optim.SGD(model.parameters(), lr=args.lr, momentum=0.9, weight_decay=0.0005)
     
     print("Done Pre.")
     pbar = tqdm(total = args.epoch)
     
+    ###################################
+    # This Block is for dataloader test
+    for p, seq, label in train_iter:
+        print(p, seq, label)
+        break
+    ###################################
+    
     for epoch in range(args.epoch):
         model.train()
-        for p, seq, label in train_iter:
-            pass
+        
+        # TODO
+        
         pbar.update(1)
         
     writer.close()
