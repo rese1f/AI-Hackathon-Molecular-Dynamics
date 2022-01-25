@@ -48,7 +48,7 @@ if __name__ == '__main__':
     # This Block is for dataloader test
     for p, seq, label in train_iter:
         seq = seq.cuda()
-        print(model(seq))
+        model(seq)
         break
     ###################################
     

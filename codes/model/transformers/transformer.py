@@ -138,13 +138,15 @@ class Transformer(nn.Module):
             positional_encoding = self._generate_PE(K, self._d_model)
             positional_encoding = positional_encoding.to(decoding.device)
             decoding.add_(positional_encoding)
-
-        for layer in self.layers_decoding:
-            decoding = layer(decoding, encoding)
+        
+        # Decoding
+        # for layer in self.layers_decoding:
+        #     decoding = layer(decoding, encoding)
 
         # Output module
         output = self._linear(decoding)
         output = torch.sigmoid(output)
+        
         return output
 
 if __name__ == '__main__':
