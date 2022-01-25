@@ -19,7 +19,7 @@ class SeqData(data.Dataset):
         
     def __getitem__(self, index):
         data = self.datasets[index]
-        p, seq, label = data[0], data[1:-1].astype('int'), data[-1]
+        p, seq, label = data[0], data[1:-1].reshape(32,1).astype('float32'), data[-1]
         return p, seq, label
 
     def __len__(self):

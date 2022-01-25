@@ -28,7 +28,7 @@ if __name__ == '__main__':
     print(args)
     writer = SummaryWriter(os.path.join('./log', args.name))
     
-    model = SeqModel()
+    model = SeqModel().cuda()
     if args.checkpoint:
         model.load_state_dict(torch.load(os.path.join('./checkpoints', args.checkpoint)))
     
@@ -47,7 +47,8 @@ if __name__ == '__main__':
     ###################################
     # This Block is for dataloader test
     for p, seq, label in train_iter:
-        print(p, seq, label)
+        seq = seq.cuda()
+        print(model(seq))
         break
     ###################################
     
