@@ -1,5 +1,4 @@
 import argparse
-from sympy import im
 import torch
 from torch.utils.data import DataLoader
 import torch.optim as optim
@@ -20,7 +19,6 @@ from utils.dataset import SeqData
 from model.seqmodel import SeqModel
 
 if __name__ == '__main__':
-    torch.set_printoptions(precision=None, threshold=4096, edgeitems=None, linewidth=None, profile=None)
     os.environ['CUDA_VISIBLE_DEVICES'] = '0'
     if not os.path.exists('./log'):
         os.mkdir('./log')
@@ -41,13 +39,15 @@ if __name__ == '__main__':
                             num_workers=16,
                             pin_memory=True)
     
-    # optimizer = optim.SGD(model.parameters(), lr=args.lr, momentum=0.9, weight_decay=0.0005)
+    optimizer = optim.SGD(model.parameters(), lr=args.lr, momentum=0.9, weight_decay=0.0005)
     
     print("Done Pre.")
     pbar = tqdm(total = args.epoch)
     
     for epoch in range(args.epoch):
-        # model.train()
+        model.train()
+        for p, seq, label in train_iter:
+            pass
         pbar.update(1)
         
     writer.close()
