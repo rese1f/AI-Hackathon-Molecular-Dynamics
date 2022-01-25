@@ -62,7 +62,7 @@ class Transformer(nn.Module):
                  dropout: float = 0.25,
                  chunk_mode: str = None,
                  pe: str = None,
-                 pe_period: int = 24):
+                 pe_period: int = 32):
         """Create transformer structure from Encoder and Decoder blocks."""
         super().__init__()
 
@@ -150,7 +150,8 @@ class Transformer(nn.Module):
         return output
 
 if __name__ == '__main__':
-    # input [b, K, d]
+    # input: B x K x Di
     input = torch.ones((16,32,1))
     model = Transformer()
+    # output: B x K x Do
     output = model(input)
