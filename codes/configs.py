@@ -6,13 +6,13 @@ def parse_args():
                         help='name for test')
     parser.add_argument('--path', default='./dataset', type=str,
                         help='path to dataset')
-    parser.add_argument('--dataset', default='ABCD', type=str,
+    parser.add_argument('--dataset', default='A', type=str,
                         help='type of dataset')
-    parser.add_argument('--checkpoint', default='',type=str,
+    parser.add_argument('--checkpoint', default='test.pth',type=str,
                         help='name of checkpoint model weight')
-    parser.add_argument('--batch-size', default=16, type=int,
+    parser.add_argument('--batch-size', default=0, type=int,
                         help='training batch size')
-    parser.add_argument('--epoch', default=10, type=int,
+    parser.add_argument('--epoch', default=128, type=int,
                         help='training epoch')
     parser.add_argument('--lr', default=0.01, type=float,
                         help='learning rate')

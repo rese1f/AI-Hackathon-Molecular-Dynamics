@@ -19,8 +19,8 @@ class SeqData(data.Dataset):
         
     def __getitem__(self, index):
         data = self.datasets[index].astype('float32')
-        p, seq, label = data[0], data[1:-1].reshape(32,1), data[-1]
-        return p, seq, label
+        cp, seq, label = data[0], data[1:-1].reshape(32,1), data[-1]
+        return cp, seq, label
 
     def __len__(self):
         return self.datasets.shape[0]
