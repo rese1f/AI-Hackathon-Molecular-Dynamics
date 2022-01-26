@@ -39,8 +39,7 @@ if __name__ == '__main__':
     for cp, seq, label in val_iter:
         pred, _ = model(cp, seq)
         fraction = torch.mean(seq, dim=1)
-    
-    
+      
     x = fraction.detach().numpy()
     p = pred.detach().numpy()
     g = label.detach().numpy()
