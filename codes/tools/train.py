@@ -36,7 +36,8 @@ if __name__ == '__main__':
                             batch_size=args.batch_size,
                             shuffle=True,
                             num_workers=0,
-                            pin_memory=True)
+                            pin_memory=True,
+                            drop_last=True)
     
     if args.checkpoint:
         model.load_state_dict(torch.load(os.path.join('./checkpoints', args.checkpoint)))
@@ -53,7 +54,8 @@ if __name__ == '__main__':
             loss.backward()
             optimizer.step()
         writer.add_scalar('loss', loss, epoch)
+        print(loss)
         pbar.update(1)
 
     writer.close()
-    torch.save(model.state_dict(), os.path.join('checkpoints', args.name+'.pth'))
+    torch.save(model.state_dict(), os.path.join('checkpoints', args.name + '.pth'))
