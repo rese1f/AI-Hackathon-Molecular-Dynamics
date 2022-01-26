@@ -43,14 +43,6 @@ if __name__ == '__main__':
     pbar = tqdm(total = args.epoch)
     print("Done Pre.")
     
-    ###################################
-    # This Block is for  test
-    for p, seq, label in train_iter:
-        seq = seq.cuda()
-        model(seq)
-        break
-    ###################################
-    
     for epoch in range(args.epoch):
         model.train()
         for p, seq, label in train_iter:

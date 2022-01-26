@@ -13,6 +13,6 @@ class SeqModel(nn.Module):
         attention = self.T(x)
         
         # Temporary Decoder
-        x = attention
+        pred = attention
         
-        return x
+        return pred
