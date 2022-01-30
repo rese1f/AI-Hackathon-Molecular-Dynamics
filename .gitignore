@@ -131,4 +131,4 @@ dmypy.json
 # Paper
 paper/*
 codes/log/*
-codes/checkpoints/*
+# codes/checkpoints/*
