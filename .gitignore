@@ -132,3 +132,7 @@ dmypy.json
 paper/*
 codes/log/*
 # codes/checkpoints/*
+
+#mac os
+.DS_Store
+*.icloud
