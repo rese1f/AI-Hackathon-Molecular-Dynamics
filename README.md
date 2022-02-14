@@ -1,4 +1,4 @@
-# AI_Hackathon_Molecular_Dynamics
+# AI Hackathon Molecular Dynamics
 
 Frequently in polymer science, the sequence of chemical repeat units plays a large role in material properties. In this project it is desired to predict the lamellar period width, as a function of the sequence of repeat units in the chain. The repeat units may be either of type B or C, encoded in the data as 1 or 0. The complexity of the data increases with increasing value of the interaction parameter between B and C, and thus several data sets with increasing values of the interaction parameter has been provided.
 
